@@ -1,125 +1,131 @@
-Terminals which are not used
+Rules never reduced
 
-   COLON
+    3 functions: /* empty */
 
 
-State 44 conflicts: 13 shift/reduce
-State 68 conflicts: 13 shift/reduce
+State 0 conflicts: 1 shift/reduce
+State 52 conflicts: 13 shift/reduce
+State 76 conflicts: 13 shift/reduce
 
 
 Grammar
 
     0 $accept: program $end
 
-    1 program: main
+    1 program: functions main
 
-    2 main: FUNC_DECL MAIN vardecls stmts END
+    2 functions: function
+    3          | /* empty */
 
-    3 vardecls: vardecl SEMI vardecls
-    4         | /* empty */
+    4 function: FUNC_DECL ID LPAREN RPAREN COLON END
 
-    5 vardecl: type id
+    5 main: FUNC_DECL MAIN vardecls stmts END
 
-    6 type: INT
-    7     | BOOL
+    6 vardecls: vardecl SEMI vardecls
+    7         | /* empty */
 
-    8 stmts: stmt SEMI stmts
-    9      | stmt SEMI
+    8 vardecl: type id
 
-   10 stmt: assign
-   11     | print
-   12     | while
-   13     | if
-   14     | for
-   15     | return
+    9 type: INT
+   10     | BOOL
 
-   16 assign: id ASSIGN expr
+   11 stmts: stmt SEMI stmts
+   12      | stmt SEMI
 
-   17 print: PRINT LPAREN id RPAREN
+   13 stmt: assign
+   14     | print
+   15     | while
+   16     | if
+   17     | for
+   18     | return
 
-   18 while: WHILE LPAREN expr RPAREN DO stmts END
+   19 assign: id ASSIGN expr
 
-   19 if: IF LPAREN expr RPAREN DO stmts END
-   20   | IF LPAREN expr RPAREN DO stmts ELSE stmts END
+   20 print: PRINT LPAREN id RPAREN
 
-   21 for: FOR LPAREN stmt SEMI expr SEMI stmt RPAREN DO stmts END
+   21 while: WHILE LPAREN expr RPAREN DO stmts END
 
-   22 expr: expr binop expr
-   23     | NOTOP expr
-   24     | id LPAREN args RPAREN
-   25     | id
-   26     | const
-   27     | LPAREN expr RPAREN
+   22 if: IF LPAREN expr RPAREN DO stmts END
+   23   | IF LPAREN expr RPAREN DO stmts ELSE stmts END
 
-   28 args: someArgs
-   29     | /* empty */
+   24 for: FOR LPAREN stmt SEMI expr SEMI stmt RPAREN DO stmts END
 
-   30 someArgs: expr moreArgs
+   25 expr: expr binop expr
+   26     | NOTOP expr
+   27     | id LPAREN args RPAREN
+   28     | id
+   29     | const
+   30     | LPAREN expr RPAREN
 
-   31 moreArgs: COMMA someArgs
-   32         | /* empty */
+   31 args: someArgs
+   32     | /* empty */
 
-   33 return: RETURN expr
+   33 someArgs: expr moreArgs
 
-   34 id: ID
+   34 moreArgs: COMMA someArgs
+   35         | /* empty */
 
-   35 const: ICONST
-   36      | BCONST
+   36 return: RETURN expr
 
-   37 binop: ADDOP
-   38      | SUBOP
-   39      | MULOP
-   40      | DIVOP
-   41      | AND
-   42      | OR
-   43      | XOR
-   44      | NOT_EQ
-   45      | EQ
-   46      | LT
-   47      | GT
-   48      | LEQ
-   49      | GEQ
+   37 id: ID
+
+   38 const: ICONST
+   39      | BCONST
+
+   40 binop: ADDOP
+   41      | SUBOP
+   42      | MULOP
+   43      | DIVOP
+   44      | AND
+   45      | OR
+   46      | XOR
+   47      | NOT_EQ
+   48      | EQ
+   49      | LT
+   50      | GT
+   51      | LEQ
+   52      | GEQ
 
 
 Terminals, with rules where they appear
 
 $end (0) 0
 error (256)
-ID (258) 34
-ICONST (259) 35
-BCONST (260) 36
-INT (261) 6
-BOOL (262) 7
-MAIN (263) 2
-NOTOP (264) 23
-ADDOP (265) 37
-SUBOP (266) 38
-MULOP (267) 39
-DIVOP (268) 40
-LPAREN (269) 17 18 19 20 21 24 27
-RPAREN (270) 17 18 19 20 21 24 27
-ASSIGN (271) 16
-SEMI (272) 3 8 9 21
-COLON (273)
-FUNC_DECL (274) 2
-END (275) 2 18 19 20 21
-PRINT (276) 17
-COMMA (277) 31
-RETURN (278) 33
-FOR (279) 21
-WHILE (280) 18
-IF (281) 19 20
-ELSE (282) 20
-DO (283) 18 19 20 21
-AND (284) 41
-OR (285) 42
-XOR (286) 43
-NOT_EQ (287) 44
-EQ (288) 45
-LT (289) 46
-GT (290) 47
-LEQ (291) 48
-GEQ (292) 49
+ID (258) 4 37
+ICONST (259) 38
+BCONST (260) 39
+INT (261) 9
+BOOL (262) 10
+MAIN (263) 5
+NOTOP (264) 26
+ADDOP (265) 40
+SUBOP (266) 41
+MULOP (267) 42
+DIVOP (268) 43
+LPAREN (269) 4 20 21 22 23 24 27 30
+RPAREN (270) 4 20 21 22 23 24 27 30
+ASSIGN (271) 19
+SEMI (272) 6 11 12 24
+COLON (273) 4
+FUNC_DECL (274) 4 5
+END (275) 4 5 21 22 23 24
+PRINT (276) 20
+COMMA (277) 34
+RETURN (278) 36
+FOR (279) 24
+WHILE (280) 21
+IF (281) 22 23
+ELSE (282) 23
+DO (283) 21 22 23 24
+AND (284) 44
+OR (285) 45
+XOR (286) 46
+NOT_EQ (287) 47
+EQ (288) 48
+LT (289) 49
+GT (290) 50
+LEQ (291) 51
+GEQ (292) 52
 
 
 Nonterminals, with rules where they appear
@@ -128,46 +134,50 @@ $accept (38)
     on left: 0
 program (39)
     on left: 1, on right: 0
-main (40)
-    on left: 2, on right: 1
-vardecls (41)
-    on left: 3 4, on right: 2 3
-vardecl (42)
-    on left: 5, on right: 3
-type (43)
-    on left: 6 7, on right: 5
-stmts (44)
-    on left: 8 9, on right: 2 8 18 19 20 21
-stmt (45)
-    on left: 10 11 12 13 14 15, on right: 8 9 21
-assign (46)
-    on left: 16, on right: 10
-print (47)
-    on left: 17, on right: 11
-while (48)
-    on left: 18, on right: 12
-if (49)
-    on left: 19 20, on right: 13
-for (50)
-    on left: 21, on right: 14
-expr (51)
-    on left: 22 23 24 25 26 27, on right: 16 18 19 20 21 22 23 27 30
-    33
-args (52)
-    on left: 28 29, on right: 24
-someArgs (53)
-    on left: 30, on right: 28 31
-moreArgs (54)
-    on left: 31 32, on right: 30
-return (55)
-    on left: 33, on right: 15
-id (56)
-    on left: 34, on right: 5 16 17 24 25
-const (57)
-    on left: 35 36, on right: 26
-binop (58)
-    on left: 37 38 39 40 41 42 43 44 45 46 47 48 49,
-    on right: 22
+functions (40)
+    on left: 2 3, on right: 1
+function (41)
+    on left: 4, on right: 2
+main (42)
+    on left: 5, on right: 1
+vardecls (43)
+    on left: 6 7, on right: 5 6
+vardecl (44)
+    on left: 8, on right: 6
+type (45)
+    on left: 9 10, on right: 8
+stmts (46)
+    on left: 11 12, on right: 5 11 21 22 23 24
+stmt (47)
+    on left: 13 14 15 16 17 18, on right: 11 12 24
+assign (48)
+    on left: 19, on right: 13
+print (49)
+    on left: 20, on right: 14
+while (50)
+    on left: 21, on right: 15
+if (51)
+    on left: 22 23, on right: 16
+for (52)
+    on left: 24, on right: 17
+expr (53)
+    on left: 25 26 27 28 29 30, on right: 19 21 22 23 24 25 26 30 33
+    36
+args (54)
+    on left: 31 32, on right: 27
+someArgs (55)
+    on left: 33, on right: 31 34
+moreArgs (56)
+    on left: 34 35, on right: 33
+return (57)
+    on left: 36, on right: 18
+id (58)
+    on left: 37, on right: 8 19 20 27 28
+const (59)
+    on left: 38 39, on right: 29
+binop (60)
+    on left: 40 41 42 43 44 45 46 47 48 49 50 51 52,
+    on right: 25
 
 
 state 0
@@ -176,1075 +186,1136 @@ state 0
 
     FUNC_DECL  shift, and go to state 1
 
-    program  go to state 2
-    main     go to state 3
+    FUNC_DECL  [reduce using rule 3 (functions)]
+
+    program    go to state 2
+    functions  go to state 3
+    function   go to state 4
 
 
 state 1
 
-    2 main: FUNC_DECL . MAIN vardecls stmts END
+    4 function: FUNC_DECL . ID LPAREN RPAREN COLON END
 
-    MAIN  shift, and go to state 4
+    ID  shift, and go to state 5
 
 
 state 2
 
     0 $accept: program . $end
 
-    $end  shift, and go to state 5
+    $end  shift, and go to state 6
 
 
 state 3
 
-    1 program: main .
+    1 program: functions . main
 
-    $default  reduce using rule 1 (program)
+    FUNC_DECL  shift, and go to state 7
+
+    main  go to state 8
 
 
 state 4
 
-    2 main: FUNC_DECL MAIN . vardecls stmts END
+    2 functions: function .
 
-    INT   shift, and go to state 6
-    BOOL  shift, and go to state 7
-
-    $default  reduce using rule 4 (vardecls)
-
-    vardecls  go to state 8
-    vardecl   go to state 9
-    type      go to state 10
+    $default  reduce using rule 2 (functions)
 
 
 state 5
+
+    4 function: FUNC_DECL ID . LPAREN RPAREN COLON END
+
+    LPAREN  shift, and go to state 9
+
+
+state 6
 
     0 $accept: program $end .
 
     $default  accept
 
 
-state 6
-
-    6 type: INT .
-
-    $default  reduce using rule 6 (type)
-
-
 state 7
 
-    7 type: BOOL .
+    5 main: FUNC_DECL . MAIN vardecls stmts END
 
-    $default  reduce using rule 7 (type)
+    MAIN  shift, and go to state 10
 
 
 state 8
 
-    2 main: FUNC_DECL MAIN vardecls . stmts END
+    1 program: functions main .
 
-    ID      shift, and go to state 11
-    PRINT   shift, and go to state 12
-    RETURN  shift, and go to state 13
-    FOR     shift, and go to state 14
-    WHILE   shift, and go to state 15
-    IF      shift, and go to state 16
-
-    stmts   go to state 17
-    stmt    go to state 18
-    assign  go to state 19
-    print   go to state 20
-    while   go to state 21
-    if      go to state 22
-    for     go to state 23
-    return  go to state 24
-    id      go to state 25
+    $default  reduce using rule 1 (program)
 
 
 state 9
 
-    3 vardecls: vardecl . SEMI vardecls
+    4 function: FUNC_DECL ID LPAREN . RPAREN COLON END
 
-    SEMI  shift, and go to state 26
+    RPAREN  shift, and go to state 11
 
 
 state 10
 
-    5 vardecl: type . id
+    5 main: FUNC_DECL MAIN . vardecls stmts END
 
-    ID  shift, and go to state 11
+    INT   shift, and go to state 12
+    BOOL  shift, and go to state 13
 
-    id  go to state 27
+    $default  reduce using rule 7 (vardecls)
+
+    vardecls  go to state 14
+    vardecl   go to state 15
+    type      go to state 16
 
 
 state 11
 
-   34 id: ID .
+    4 function: FUNC_DECL ID LPAREN RPAREN . COLON END
 
-    $default  reduce using rule 34 (id)
+    COLON  shift, and go to state 17
 
 
 state 12
 
-   17 print: PRINT . LPAREN id RPAREN
+    9 type: INT .
 
-    LPAREN  shift, and go to state 28
+    $default  reduce using rule 9 (type)
 
 
 state 13
 
-   33 return: RETURN . expr
+   10 type: BOOL .
 
-    ID      shift, and go to state 11
-    ICONST  shift, and go to state 29
-    BCONST  shift, and go to state 30
-    NOTOP   shift, and go to state 31
-    LPAREN  shift, and go to state 32
-
-    expr   go to state 33
-    id     go to state 34
-    const  go to state 35
+    $default  reduce using rule 10 (type)
 
 
 state 14
 
-   21 for: FOR . LPAREN stmt SEMI expr SEMI stmt RPAREN DO stmts END
+    5 main: FUNC_DECL MAIN vardecls . stmts END
 
-    LPAREN  shift, and go to state 36
+    ID      shift, and go to state 18
+    PRINT   shift, and go to state 19
+    RETURN  shift, and go to state 20
+    FOR     shift, and go to state 21
+    WHILE   shift, and go to state 22
+    IF      shift, and go to state 23
+
+    stmts   go to state 24
+    stmt    go to state 25
+    assign  go to state 26
+    print   go to state 27
+    while   go to state 28
+    if      go to state 29
+    for     go to state 30
+    return  go to state 31
+    id      go to state 32
 
 
 state 15
 
-   18 while: WHILE . LPAREN expr RPAREN DO stmts END
+    6 vardecls: vardecl . SEMI vardecls
 
-    LPAREN  shift, and go to state 37
+    SEMI  shift, and go to state 33
 
 
 state 16
 
-   19 if: IF . LPAREN expr RPAREN DO stmts END
-   20   | IF . LPAREN expr RPAREN DO stmts ELSE stmts END
+    8 vardecl: type . id
 
-    LPAREN  shift, and go to state 38
+    ID  shift, and go to state 18
+
+    id  go to state 34
 
 
 state 17
 
-    2 main: FUNC_DECL MAIN vardecls stmts . END
+    4 function: FUNC_DECL ID LPAREN RPAREN COLON . END
 
-    END  shift, and go to state 39
+    END  shift, and go to state 35
 
 
 state 18
 
-    8 stmts: stmt . SEMI stmts
-    9      | stmt . SEMI
+   37 id: ID .
 
-    SEMI  shift, and go to state 40
+    $default  reduce using rule 37 (id)
 
 
 state 19
 
-   10 stmt: assign .
+   20 print: PRINT . LPAREN id RPAREN
 
-    $default  reduce using rule 10 (stmt)
+    LPAREN  shift, and go to state 36
 
 
 state 20
 
-   11 stmt: print .
+   36 return: RETURN . expr
 
-    $default  reduce using rule 11 (stmt)
+    ID      shift, and go to state 18
+    ICONST  shift, and go to state 37
+    BCONST  shift, and go to state 38
+    NOTOP   shift, and go to state 39
+    LPAREN  shift, and go to state 40
+
+    expr   go to state 41
+    id     go to state 42
+    const  go to state 43
 
 
 state 21
 
-   12 stmt: while .
+   24 for: FOR . LPAREN stmt SEMI expr SEMI stmt RPAREN DO stmts END
 
-    $default  reduce using rule 12 (stmt)
+    LPAREN  shift, and go to state 44
 
 
 state 22
 
-   13 stmt: if .
+   21 while: WHILE . LPAREN expr RPAREN DO stmts END
 
-    $default  reduce using rule 13 (stmt)
+    LPAREN  shift, and go to state 45
 
 
 state 23
 
-   14 stmt: for .
+   22 if: IF . LPAREN expr RPAREN DO stmts END
+   23   | IF . LPAREN expr RPAREN DO stmts ELSE stmts END
 
-    $default  reduce using rule 14 (stmt)
+    LPAREN  shift, and go to state 46
 
 
 state 24
 
-   15 stmt: return .
+    5 main: FUNC_DECL MAIN vardecls stmts . END
 
-    $default  reduce using rule 15 (stmt)
+    END  shift, and go to state 47
 
 
 state 25
 
-   16 assign: id . ASSIGN expr
+   11 stmts: stmt . SEMI stmts
+   12      | stmt . SEMI
 
-    ASSIGN  shift, and go to state 41
+    SEMI  shift, and go to state 48
 
 
 state 26
 
-    3 vardecls: vardecl SEMI . vardecls
+   13 stmt: assign .
 
-    INT   shift, and go to state 6
-    BOOL  shift, and go to state 7
-
-    $default  reduce using rule 4 (vardecls)
-
-    vardecls  go to state 42
-    vardecl   go to state 9
-    type      go to state 10
+    $default  reduce using rule 13 (stmt)
 
 
 state 27
 
-    5 vardecl: type id .
+   14 stmt: print .
 
-    $default  reduce using rule 5 (vardecl)
+    $default  reduce using rule 14 (stmt)
 
 
 state 28
 
-   17 print: PRINT LPAREN . id RPAREN
+   15 stmt: while .
 
-    ID  shift, and go to state 11
-
-    id  go to state 43
+    $default  reduce using rule 15 (stmt)
 
 
 state 29
 
-   35 const: ICONST .
+   16 stmt: if .
 
-    $default  reduce using rule 35 (const)
+    $default  reduce using rule 16 (stmt)
 
 
 state 30
 
-   36 const: BCONST .
+   17 stmt: for .
 
-    $default  reduce using rule 36 (const)
+    $default  reduce using rule 17 (stmt)
 
 
 state 31
 
-   23 expr: NOTOP . expr
+   18 stmt: return .
 
-    ID      shift, and go to state 11
-    ICONST  shift, and go to state 29
-    BCONST  shift, and go to state 30
-    NOTOP   shift, and go to state 31
-    LPAREN  shift, and go to state 32
-
-    expr   go to state 44
-    id     go to state 34
-    const  go to state 35
+    $default  reduce using rule 18 (stmt)
 
 
 state 32
 
-   27 expr: LPAREN . expr RPAREN
+   19 assign: id . ASSIGN expr
 
-    ID      shift, and go to state 11
-    ICONST  shift, and go to state 29
-    BCONST  shift, and go to state 30
-    NOTOP   shift, and go to state 31
-    LPAREN  shift, and go to state 32
-
-    expr   go to state 45
-    id     go to state 34
-    const  go to state 35
+    ASSIGN  shift, and go to state 49
 
 
 state 33
 
-   22 expr: expr . binop expr
-   33 return: RETURN expr .
+    6 vardecls: vardecl SEMI . vardecls
 
-    ADDOP   shift, and go to state 46
-    SUBOP   shift, and go to state 47
-    MULOP   shift, and go to state 48
-    DIVOP   shift, and go to state 49
-    AND     shift, and go to state 50
-    OR      shift, and go to state 51
-    XOR     shift, and go to state 52
-    NOT_EQ  shift, and go to state 53
-    EQ      shift, and go to state 54
-    LT      shift, and go to state 55
-    GT      shift, and go to state 56
-    LEQ     shift, and go to state 57
-    GEQ     shift, and go to state 58
+    INT   shift, and go to state 12
+    BOOL  shift, and go to state 13
 
-    $default  reduce using rule 33 (return)
+    $default  reduce using rule 7 (vardecls)
 
-    binop  go to state 59
+    vardecls  go to state 50
+    vardecl   go to state 15
+    type      go to state 16
 
 
 state 34
 
-   24 expr: id . LPAREN args RPAREN
-   25     | id .
+    8 vardecl: type id .
 
-    LPAREN  shift, and go to state 60
-
-    $default  reduce using rule 25 (expr)
+    $default  reduce using rule 8 (vardecl)
 
 
 state 35
 
-   26 expr: const .
+    4 function: FUNC_DECL ID LPAREN RPAREN COLON END .
 
-    $default  reduce using rule 26 (expr)
+    $default  reduce using rule 4 (function)
 
 
 state 36
 
-   21 for: FOR LPAREN . stmt SEMI expr SEMI stmt RPAREN DO stmts END
+   20 print: PRINT LPAREN . id RPAREN
 
-    ID      shift, and go to state 11
-    PRINT   shift, and go to state 12
-    RETURN  shift, and go to state 13
-    FOR     shift, and go to state 14
-    WHILE   shift, and go to state 15
-    IF      shift, and go to state 16
+    ID  shift, and go to state 18
 
-    stmt    go to state 61
-    assign  go to state 19
-    print   go to state 20
-    while   go to state 21
-    if      go to state 22
-    for     go to state 23
-    return  go to state 24
-    id      go to state 25
+    id  go to state 51
 
 
 state 37
 
-   18 while: WHILE LPAREN . expr RPAREN DO stmts END
+   38 const: ICONST .
 
-    ID      shift, and go to state 11
-    ICONST  shift, and go to state 29
-    BCONST  shift, and go to state 30
-    NOTOP   shift, and go to state 31
-    LPAREN  shift, and go to state 32
-
-    expr   go to state 62
-    id     go to state 34
-    const  go to state 35
+    $default  reduce using rule 38 (const)
 
 
 state 38
 
-   19 if: IF LPAREN . expr RPAREN DO stmts END
-   20   | IF LPAREN . expr RPAREN DO stmts ELSE stmts END
+   39 const: BCONST .
 
-    ID      shift, and go to state 11
-    ICONST  shift, and go to state 29
-    BCONST  shift, and go to state 30
-    NOTOP   shift, and go to state 31
-    LPAREN  shift, and go to state 32
-
-    expr   go to state 63
-    id     go to state 34
-    const  go to state 35
+    $default  reduce using rule 39 (const)
 
 
 state 39
 
-    2 main: FUNC_DECL MAIN vardecls stmts END .
+   26 expr: NOTOP . expr
 
-    $default  reduce using rule 2 (main)
+    ID      shift, and go to state 18
+    ICONST  shift, and go to state 37
+    BCONST  shift, and go to state 38
+    NOTOP   shift, and go to state 39
+    LPAREN  shift, and go to state 40
+
+    expr   go to state 52
+    id     go to state 42
+    const  go to state 43
 
 
 state 40
 
-    8 stmts: stmt SEMI . stmts
-    9      | stmt SEMI .
+   30 expr: LPAREN . expr RPAREN
 
-    ID      shift, and go to state 11
-    PRINT   shift, and go to state 12
-    RETURN  shift, and go to state 13
-    FOR     shift, and go to state 14
-    WHILE   shift, and go to state 15
-    IF      shift, and go to state 16
+    ID      shift, and go to state 18
+    ICONST  shift, and go to state 37
+    BCONST  shift, and go to state 38
+    NOTOP   shift, and go to state 39
+    LPAREN  shift, and go to state 40
 
-    $default  reduce using rule 9 (stmts)
-
-    stmts   go to state 64
-    stmt    go to state 18
-    assign  go to state 19
-    print   go to state 20
-    while   go to state 21
-    if      go to state 22
-    for     go to state 23
-    return  go to state 24
-    id      go to state 25
+    expr   go to state 53
+    id     go to state 42
+    const  go to state 43
 
 
 state 41
 
-   16 assign: id ASSIGN . expr
+   25 expr: expr . binop expr
+   36 return: RETURN expr .
 
-    ID      shift, and go to state 11
-    ICONST  shift, and go to state 29
-    BCONST  shift, and go to state 30
-    NOTOP   shift, and go to state 31
-    LPAREN  shift, and go to state 32
+    ADDOP   shift, and go to state 54
+    SUBOP   shift, and go to state 55
+    MULOP   shift, and go to state 56
+    DIVOP   shift, and go to state 57
+    AND     shift, and go to state 58
+    OR      shift, and go to state 59
+    XOR     shift, and go to state 60
+    NOT_EQ  shift, and go to state 61
+    EQ      shift, and go to state 62
+    LT      shift, and go to state 63
+    GT      shift, and go to state 64
+    LEQ     shift, and go to state 65
+    GEQ     shift, and go to state 66
 
-    expr   go to state 65
-    id     go to state 34
-    const  go to state 35
+    $default  reduce using rule 36 (return)
+
+    binop  go to state 67
 
 
 state 42
 
-    3 vardecls: vardecl SEMI vardecls .
+   27 expr: id . LPAREN args RPAREN
+   28     | id .
 
-    $default  reduce using rule 3 (vardecls)
+    LPAREN  shift, and go to state 68
+
+    $default  reduce using rule 28 (expr)
 
 
 state 43
 
-   17 print: PRINT LPAREN id . RPAREN
+   29 expr: const .
 
-    RPAREN  shift, and go to state 66
+    $default  reduce using rule 29 (expr)
 
 
 state 44
 
-   22 expr: expr . binop expr
-   23     | NOTOP expr .
+   24 for: FOR LPAREN . stmt SEMI expr SEMI stmt RPAREN DO stmts END
 
-    ADDOP   shift, and go to state 46
-    SUBOP   shift, and go to state 47
-    MULOP   shift, and go to state 48
-    DIVOP   shift, and go to state 49
-    AND     shift, and go to state 50
-    OR      shift, and go to state 51
-    XOR     shift, and go to state 52
-    NOT_EQ  shift, and go to state 53
-    EQ      shift, and go to state 54
-    LT      shift, and go to state 55
-    GT      shift, and go to state 56
-    LEQ     shift, and go to state 57
-    GEQ     shift, and go to state 58
+    ID      shift, and go to state 18
+    PRINT   shift, and go to state 19
+    RETURN  shift, and go to state 20
+    FOR     shift, and go to state 21
+    WHILE   shift, and go to state 22
+    IF      shift, and go to state 23
 
-    ADDOP     [reduce using rule 23 (expr)]
-    SUBOP     [reduce using rule 23 (expr)]
-    MULOP     [reduce using rule 23 (expr)]
-    DIVOP     [reduce using rule 23 (expr)]
-    AND       [reduce using rule 23 (expr)]
-    OR        [reduce using rule 23 (expr)]
-    XOR       [reduce using rule 23 (expr)]
-    NOT_EQ    [reduce using rule 23 (expr)]
-    EQ        [reduce using rule 23 (expr)]
-    LT        [reduce using rule 23 (expr)]
-    GT        [reduce using rule 23 (expr)]
-    LEQ       [reduce using rule 23 (expr)]
-    GEQ       [reduce using rule 23 (expr)]
-    $default  reduce using rule 23 (expr)
-
-    binop  go to state 59
+    stmt    go to state 69
+    assign  go to state 26
+    print   go to state 27
+    while   go to state 28
+    if      go to state 29
+    for     go to state 30
+    return  go to state 31
+    id      go to state 32
 
 
 state 45
 
-   22 expr: expr . binop expr
-   27     | LPAREN expr . RPAREN
+   21 while: WHILE LPAREN . expr RPAREN DO stmts END
 
-    ADDOP   shift, and go to state 46
-    SUBOP   shift, and go to state 47
-    MULOP   shift, and go to state 48
-    DIVOP   shift, and go to state 49
-    RPAREN  shift, and go to state 67
-    AND     shift, and go to state 50
-    OR      shift, and go to state 51
-    XOR     shift, and go to state 52
-    NOT_EQ  shift, and go to state 53
-    EQ      shift, and go to state 54
-    LT      shift, and go to state 55
-    GT      shift, and go to state 56
-    LEQ     shift, and go to state 57
-    GEQ     shift, and go to state 58
+    ID      shift, and go to state 18
+    ICONST  shift, and go to state 37
+    BCONST  shift, and go to state 38
+    NOTOP   shift, and go to state 39
+    LPAREN  shift, and go to state 40
 
-    binop  go to state 59
+    expr   go to state 70
+    id     go to state 42
+    const  go to state 43
 
 
 state 46
 
-   37 binop: ADDOP .
+   22 if: IF LPAREN . expr RPAREN DO stmts END
+   23   | IF LPAREN . expr RPAREN DO stmts ELSE stmts END
 
-    $default  reduce using rule 37 (binop)
+    ID      shift, and go to state 18
+    ICONST  shift, and go to state 37
+    BCONST  shift, and go to state 38
+    NOTOP   shift, and go to state 39
+    LPAREN  shift, and go to state 40
+
+    expr   go to state 71
+    id     go to state 42
+    const  go to state 43
 
 
 state 47
 
-   38 binop: SUBOP .
+    5 main: FUNC_DECL MAIN vardecls stmts END .
 
-    $default  reduce using rule 38 (binop)
+    $default  reduce using rule 5 (main)
 
 
 state 48
 
-   39 binop: MULOP .
+   11 stmts: stmt SEMI . stmts
+   12      | stmt SEMI .
 
-    $default  reduce using rule 39 (binop)
+    ID      shift, and go to state 18
+    PRINT   shift, and go to state 19
+    RETURN  shift, and go to state 20
+    FOR     shift, and go to state 21
+    WHILE   shift, and go to state 22
+    IF      shift, and go to state 23
+
+    $default  reduce using rule 12 (stmts)
+
+    stmts   go to state 72
+    stmt    go to state 25
+    assign  go to state 26
+    print   go to state 27
+    while   go to state 28
+    if      go to state 29
+    for     go to state 30
+    return  go to state 31
+    id      go to state 32
 
 
 state 49
 
-   40 binop: DIVOP .
+   19 assign: id ASSIGN . expr
 
-    $default  reduce using rule 40 (binop)
+    ID      shift, and go to state 18
+    ICONST  shift, and go to state 37
+    BCONST  shift, and go to state 38
+    NOTOP   shift, and go to state 39
+    LPAREN  shift, and go to state 40
+
+    expr   go to state 73
+    id     go to state 42
+    const  go to state 43
 
 
 state 50
 
-   41 binop: AND .
+    6 vardecls: vardecl SEMI vardecls .
 
-    $default  reduce using rule 41 (binop)
+    $default  reduce using rule 6 (vardecls)
 
 
 state 51
 
-   42 binop: OR .
+   20 print: PRINT LPAREN id . RPAREN
 
-    $default  reduce using rule 42 (binop)
+    RPAREN  shift, and go to state 74
 
 
 state 52
 
-   43 binop: XOR .
+   25 expr: expr . binop expr
+   26     | NOTOP expr .
 
-    $default  reduce using rule 43 (binop)
+    ADDOP   shift, and go to state 54
+    SUBOP   shift, and go to state 55
+    MULOP   shift, and go to state 56
+    DIVOP   shift, and go to state 57
+    AND     shift, and go to state 58
+    OR      shift, and go to state 59
+    XOR     shift, and go to state 60
+    NOT_EQ  shift, and go to state 61
+    EQ      shift, and go to state 62
+    LT      shift, and go to state 63
+    GT      shift, and go to state 64
+    LEQ     shift, and go to state 65
+    GEQ     shift, and go to state 66
+
+    ADDOP     [reduce using rule 26 (expr)]
+    SUBOP     [reduce using rule 26 (expr)]
+    MULOP     [reduce using rule 26 (expr)]
+    DIVOP     [reduce using rule 26 (expr)]
+    AND       [reduce using rule 26 (expr)]
+    OR        [reduce using rule 26 (expr)]
+    XOR       [reduce using rule 26 (expr)]
+    NOT_EQ    [reduce using rule 26 (expr)]
+    EQ        [reduce using rule 26 (expr)]
+    LT        [reduce using rule 26 (expr)]
+    GT        [reduce using rule 26 (expr)]
+    LEQ       [reduce using rule 26 (expr)]
+    GEQ       [reduce using rule 26 (expr)]
+    $default  reduce using rule 26 (expr)
+
+    binop  go to state 67
 
 
 state 53
 
-   44 binop: NOT_EQ .
+   25 expr: expr . binop expr
+   30     | LPAREN expr . RPAREN
 
-    $default  reduce using rule 44 (binop)
+    ADDOP   shift, and go to state 54
+    SUBOP   shift, and go to state 55
+    MULOP   shift, and go to state 56
+    DIVOP   shift, and go to state 57
+    RPAREN  shift, and go to state 75
+    AND     shift, and go to state 58
+    OR      shift, and go to state 59
+    XOR     shift, and go to state 60
+    NOT_EQ  shift, and go to state 61
+    EQ      shift, and go to state 62
+    LT      shift, and go to state 63
+    GT      shift, and go to state 64
+    LEQ     shift, and go to state 65
+    GEQ     shift, and go to state 66
+
+    binop  go to state 67
 
 
 state 54
 
-   45 binop: EQ .
+   40 binop: ADDOP .
 
-    $default  reduce using rule 45 (binop)
+    $default  reduce using rule 40 (binop)
 
 
 state 55
 
-   46 binop: LT .
+   41 binop: SUBOP .
 
-    $default  reduce using rule 46 (binop)
+    $default  reduce using rule 41 (binop)
 
 
 state 56
 
-   47 binop: GT .
+   42 binop: MULOP .
 
-    $default  reduce using rule 47 (binop)
+    $default  reduce using rule 42 (binop)
 
 
 state 57
 
-   48 binop: LEQ .
+   43 binop: DIVOP .
 
-    $default  reduce using rule 48 (binop)
+    $default  reduce using rule 43 (binop)
 
 
 state 58
 
-   49 binop: GEQ .
+   44 binop: AND .
 
-    $default  reduce using rule 49 (binop)
+    $default  reduce using rule 44 (binop)
 
 
 state 59
 
-   22 expr: expr binop . expr
+   45 binop: OR .
 
-    ID      shift, and go to state 11
-    ICONST  shift, and go to state 29
-    BCONST  shift, and go to state 30
-    NOTOP   shift, and go to state 31
-    LPAREN  shift, and go to state 32
-
-    expr   go to state 68
-    id     go to state 34
-    const  go to state 35
+    $default  reduce using rule 45 (binop)
 
 
 state 60
 
-   24 expr: id LPAREN . args RPAREN
+   46 binop: XOR .
 
-    ID      shift, and go to state 11
-    ICONST  shift, and go to state 29
-    BCONST  shift, and go to state 30
-    NOTOP   shift, and go to state 31
-    LPAREN  shift, and go to state 32
-
-    $default  reduce using rule 29 (args)
-
-    expr      go to state 69
-    args      go to state 70
-    someArgs  go to state 71
-    id        go to state 34
-    const     go to state 35
+    $default  reduce using rule 46 (binop)
 
 
 state 61
 
-   21 for: FOR LPAREN stmt . SEMI expr SEMI stmt RPAREN DO stmts END
+   47 binop: NOT_EQ .
 
-    SEMI  shift, and go to state 72
+    $default  reduce using rule 47 (binop)
 
 
 state 62
 
-   18 while: WHILE LPAREN expr . RPAREN DO stmts END
-   22 expr: expr . binop expr
+   48 binop: EQ .
 
-    ADDOP   shift, and go to state 46
-    SUBOP   shift, and go to state 47
-    MULOP   shift, and go to state 48
-    DIVOP   shift, and go to state 49
-    RPAREN  shift, and go to state 73
-    AND     shift, and go to state 50
-    OR      shift, and go to state 51
-    XOR     shift, and go to state 52
-    NOT_EQ  shift, and go to state 53
-    EQ      shift, and go to state 54
-    LT      shift, and go to state 55
-    GT      shift, and go to state 56
-    LEQ     shift, and go to state 57
-    GEQ     shift, and go to state 58
-
-    binop  go to state 59
+    $default  reduce using rule 48 (binop)
 
 
 state 63
 
-   19 if: IF LPAREN expr . RPAREN DO stmts END
-   20   | IF LPAREN expr . RPAREN DO stmts ELSE stmts END
-   22 expr: expr . binop expr
+   49 binop: LT .
 
-    ADDOP   shift, and go to state 46
-    SUBOP   shift, and go to state 47
-    MULOP   shift, and go to state 48
-    DIVOP   shift, and go to state 49
-    RPAREN  shift, and go to state 74
-    AND     shift, and go to state 50
-    OR      shift, and go to state 51
-    XOR     shift, and go to state 52
-    NOT_EQ  shift, and go to state 53
-    EQ      shift, and go to state 54
-    LT      shift, and go to state 55
-    GT      shift, and go to state 56
-    LEQ     shift, and go to state 57
-    GEQ     shift, and go to state 58
-
-    binop  go to state 59
+    $default  reduce using rule 49 (binop)
 
 
 state 64
 
-    8 stmts: stmt SEMI stmts .
+   50 binop: GT .
 
-    $default  reduce using rule 8 (stmts)
+    $default  reduce using rule 50 (binop)
 
 
 state 65
 
-   16 assign: id ASSIGN expr .
-   22 expr: expr . binop expr
+   51 binop: LEQ .
 
-    ADDOP   shift, and go to state 46
-    SUBOP   shift, and go to state 47
-    MULOP   shift, and go to state 48
-    DIVOP   shift, and go to state 49
-    AND     shift, and go to state 50
-    OR      shift, and go to state 51
-    XOR     shift, and go to state 52
-    NOT_EQ  shift, and go to state 53
-    EQ      shift, and go to state 54
-    LT      shift, and go to state 55
-    GT      shift, and go to state 56
-    LEQ     shift, and go to state 57
-    GEQ     shift, and go to state 58
-
-    $default  reduce using rule 16 (assign)
-
-    binop  go to state 59
+    $default  reduce using rule 51 (binop)
 
 
 state 66
 
-   17 print: PRINT LPAREN id RPAREN .
+   52 binop: GEQ .
 
-    $default  reduce using rule 17 (print)
+    $default  reduce using rule 52 (binop)
 
 
 state 67
 
-   27 expr: LPAREN expr RPAREN .
+   25 expr: expr binop . expr
 
-    $default  reduce using rule 27 (expr)
+    ID      shift, and go to state 18
+    ICONST  shift, and go to state 37
+    BCONST  shift, and go to state 38
+    NOTOP   shift, and go to state 39
+    LPAREN  shift, and go to state 40
+
+    expr   go to state 76
+    id     go to state 42
+    const  go to state 43
 
 
 state 68
 
-   22 expr: expr . binop expr
-   22     | expr binop expr .
+   27 expr: id LPAREN . args RPAREN
 
-    ADDOP   shift, and go to state 46
-    SUBOP   shift, and go to state 47
-    MULOP   shift, and go to state 48
-    DIVOP   shift, and go to state 49
-    AND     shift, and go to state 50
-    OR      shift, and go to state 51
-    XOR     shift, and go to state 52
-    NOT_EQ  shift, and go to state 53
-    EQ      shift, and go to state 54
-    LT      shift, and go to state 55
-    GT      shift, and go to state 56
-    LEQ     shift, and go to state 57
-    GEQ     shift, and go to state 58
+    ID      shift, and go to state 18
+    ICONST  shift, and go to state 37
+    BCONST  shift, and go to state 38
+    NOTOP   shift, and go to state 39
+    LPAREN  shift, and go to state 40
 
-    ADDOP     [reduce using rule 22 (expr)]
-    SUBOP     [reduce using rule 22 (expr)]
-    MULOP     [reduce using rule 22 (expr)]
-    DIVOP     [reduce using rule 22 (expr)]
-    AND       [reduce using rule 22 (expr)]
-    OR        [reduce using rule 22 (expr)]
-    XOR       [reduce using rule 22 (expr)]
-    NOT_EQ    [reduce using rule 22 (expr)]
-    EQ        [reduce using rule 22 (expr)]
-    LT        [reduce using rule 22 (expr)]
-    GT        [reduce using rule 22 (expr)]
-    LEQ       [reduce using rule 22 (expr)]
-    GEQ       [reduce using rule 22 (expr)]
-    $default  reduce using rule 22 (expr)
+    $default  reduce using rule 32 (args)
 
-    binop  go to state 59
+    expr      go to state 77
+    args      go to state 78
+    someArgs  go to state 79
+    id        go to state 42
+    const     go to state 43
 
 
 state 69
 
-   22 expr: expr . binop expr
-   30 someArgs: expr . moreArgs
+   24 for: FOR LPAREN stmt . SEMI expr SEMI stmt RPAREN DO stmts END
 
-    ADDOP   shift, and go to state 46
-    SUBOP   shift, and go to state 47
-    MULOP   shift, and go to state 48
-    DIVOP   shift, and go to state 49
-    COMMA   shift, and go to state 75
-    AND     shift, and go to state 50
-    OR      shift, and go to state 51
-    XOR     shift, and go to state 52
-    NOT_EQ  shift, and go to state 53
-    EQ      shift, and go to state 54
-    LT      shift, and go to state 55
-    GT      shift, and go to state 56
-    LEQ     shift, and go to state 57
-    GEQ     shift, and go to state 58
-
-    $default  reduce using rule 32 (moreArgs)
-
-    moreArgs  go to state 76
-    binop     go to state 59
+    SEMI  shift, and go to state 80
 
 
 state 70
 
-   24 expr: id LPAREN args . RPAREN
+   21 while: WHILE LPAREN expr . RPAREN DO stmts END
+   25 expr: expr . binop expr
 
-    RPAREN  shift, and go to state 77
+    ADDOP   shift, and go to state 54
+    SUBOP   shift, and go to state 55
+    MULOP   shift, and go to state 56
+    DIVOP   shift, and go to state 57
+    RPAREN  shift, and go to state 81
+    AND     shift, and go to state 58
+    OR      shift, and go to state 59
+    XOR     shift, and go to state 60
+    NOT_EQ  shift, and go to state 61
+    EQ      shift, and go to state 62
+    LT      shift, and go to state 63
+    GT      shift, and go to state 64
+    LEQ     shift, and go to state 65
+    GEQ     shift, and go to state 66
+
+    binop  go to state 67
 
 
 state 71
 
-   28 args: someArgs .
+   22 if: IF LPAREN expr . RPAREN DO stmts END
+   23   | IF LPAREN expr . RPAREN DO stmts ELSE stmts END
+   25 expr: expr . binop expr
 
-    $default  reduce using rule 28 (args)
+    ADDOP   shift, and go to state 54
+    SUBOP   shift, and go to state 55
+    MULOP   shift, and go to state 56
+    DIVOP   shift, and go to state 57
+    RPAREN  shift, and go to state 82
+    AND     shift, and go to state 58
+    OR      shift, and go to state 59
+    XOR     shift, and go to state 60
+    NOT_EQ  shift, and go to state 61
+    EQ      shift, and go to state 62
+    LT      shift, and go to state 63
+    GT      shift, and go to state 64
+    LEQ     shift, and go to state 65
+    GEQ     shift, and go to state 66
+
+    binop  go to state 67
 
 
 state 72
 
-   21 for: FOR LPAREN stmt SEMI . expr SEMI stmt RPAREN DO stmts END
+   11 stmts: stmt SEMI stmts .
 
-    ID      shift, and go to state 11
-    ICONST  shift, and go to state 29
-    BCONST  shift, and go to state 30
-    NOTOP   shift, and go to state 31
-    LPAREN  shift, and go to state 32
-
-    expr   go to state 78
-    id     go to state 34
-    const  go to state 35
+    $default  reduce using rule 11 (stmts)
 
 
 state 73
 
-   18 while: WHILE LPAREN expr RPAREN . DO stmts END
+   19 assign: id ASSIGN expr .
+   25 expr: expr . binop expr
 
-    DO  shift, and go to state 79
+    ADDOP   shift, and go to state 54
+    SUBOP   shift, and go to state 55
+    MULOP   shift, and go to state 56
+    DIVOP   shift, and go to state 57
+    AND     shift, and go to state 58
+    OR      shift, and go to state 59
+    XOR     shift, and go to state 60
+    NOT_EQ  shift, and go to state 61
+    EQ      shift, and go to state 62
+    LT      shift, and go to state 63
+    GT      shift, and go to state 64
+    LEQ     shift, and go to state 65
+    GEQ     shift, and go to state 66
+
+    $default  reduce using rule 19 (assign)
+
+    binop  go to state 67
 
 
 state 74
 
-   19 if: IF LPAREN expr RPAREN . DO stmts END
-   20   | IF LPAREN expr RPAREN . DO stmts ELSE stmts END
+   20 print: PRINT LPAREN id RPAREN .
 
-    DO  shift, and go to state 80
+    $default  reduce using rule 20 (print)
 
 
 state 75
 
-   31 moreArgs: COMMA . someArgs
+   30 expr: LPAREN expr RPAREN .
 
-    ID      shift, and go to state 11
-    ICONST  shift, and go to state 29
-    BCONST  shift, and go to state 30
-    NOTOP   shift, and go to state 31
-    LPAREN  shift, and go to state 32
-
-    expr      go to state 69
-    someArgs  go to state 81
-    id        go to state 34
-    const     go to state 35
+    $default  reduce using rule 30 (expr)
 
 
 state 76
 
-   30 someArgs: expr moreArgs .
+   25 expr: expr . binop expr
+   25     | expr binop expr .
 
-    $default  reduce using rule 30 (someArgs)
+    ADDOP   shift, and go to state 54
+    SUBOP   shift, and go to state 55
+    MULOP   shift, and go to state 56
+    DIVOP   shift, and go to state 57
+    AND     shift, and go to state 58
+    OR      shift, and go to state 59
+    XOR     shift, and go to state 60
+    NOT_EQ  shift, and go to state 61
+    EQ      shift, and go to state 62
+    LT      shift, and go to state 63
+    GT      shift, and go to state 64
+    LEQ     shift, and go to state 65
+    GEQ     shift, and go to state 66
+
+    ADDOP     [reduce using rule 25 (expr)]
+    SUBOP     [reduce using rule 25 (expr)]
+    MULOP     [reduce using rule 25 (expr)]
+    DIVOP     [reduce using rule 25 (expr)]
+    AND       [reduce using rule 25 (expr)]
+    OR        [reduce using rule 25 (expr)]
+    XOR       [reduce using rule 25 (expr)]
+    NOT_EQ    [reduce using rule 25 (expr)]
+    EQ        [reduce using rule 25 (expr)]
+    LT        [reduce using rule 25 (expr)]
+    GT        [reduce using rule 25 (expr)]
+    LEQ       [reduce using rule 25 (expr)]
+    GEQ       [reduce using rule 25 (expr)]
+    $default  reduce using rule 25 (expr)
+
+    binop  go to state 67
 
 
 state 77
 
-   24 expr: id LPAREN args RPAREN .
+   25 expr: expr . binop expr
+   33 someArgs: expr . moreArgs
 
-    $default  reduce using rule 24 (expr)
+    ADDOP   shift, and go to state 54
+    SUBOP   shift, and go to state 55
+    MULOP   shift, and go to state 56
+    DIVOP   shift, and go to state 57
+    COMMA   shift, and go to state 83
+    AND     shift, and go to state 58
+    OR      shift, and go to state 59
+    XOR     shift, and go to state 60
+    NOT_EQ  shift, and go to state 61
+    EQ      shift, and go to state 62
+    LT      shift, and go to state 63
+    GT      shift, and go to state 64
+    LEQ     shift, and go to state 65
+    GEQ     shift, and go to state 66
+
+    $default  reduce using rule 35 (moreArgs)
+
+    moreArgs  go to state 84
+    binop     go to state 67
 
 
 state 78
 
-   21 for: FOR LPAREN stmt SEMI expr . SEMI stmt RPAREN DO stmts END
-   22 expr: expr . binop expr
+   27 expr: id LPAREN args . RPAREN
 
-    ADDOP   shift, and go to state 46
-    SUBOP   shift, and go to state 47
-    MULOP   shift, and go to state 48
-    DIVOP   shift, and go to state 49
-    SEMI    shift, and go to state 82
-    AND     shift, and go to state 50
-    OR      shift, and go to state 51
-    XOR     shift, and go to state 52
-    NOT_EQ  shift, and go to state 53
-    EQ      shift, and go to state 54
-    LT      shift, and go to state 55
-    GT      shift, and go to state 56
-    LEQ     shift, and go to state 57
-    GEQ     shift, and go to state 58
-
-    binop  go to state 59
+    RPAREN  shift, and go to state 85
 
 
 state 79
 
-   18 while: WHILE LPAREN expr RPAREN DO . stmts END
+   31 args: someArgs .
 
-    ID      shift, and go to state 11
-    PRINT   shift, and go to state 12
-    RETURN  shift, and go to state 13
-    FOR     shift, and go to state 14
-    WHILE   shift, and go to state 15
-    IF      shift, and go to state 16
-
-    stmts   go to state 83
-    stmt    go to state 18
-    assign  go to state 19
-    print   go to state 20
-    while   go to state 21
-    if      go to state 22
-    for     go to state 23
-    return  go to state 24
-    id      go to state 25
+    $default  reduce using rule 31 (args)
 
 
 state 80
 
-   19 if: IF LPAREN expr RPAREN DO . stmts END
-   20   | IF LPAREN expr RPAREN DO . stmts ELSE stmts END
+   24 for: FOR LPAREN stmt SEMI . expr SEMI stmt RPAREN DO stmts END
 
-    ID      shift, and go to state 11
-    PRINT   shift, and go to state 12
-    RETURN  shift, and go to state 13
-    FOR     shift, and go to state 14
-    WHILE   shift, and go to state 15
-    IF      shift, and go to state 16
+    ID      shift, and go to state 18
+    ICONST  shift, and go to state 37
+    BCONST  shift, and go to state 38
+    NOTOP   shift, and go to state 39
+    LPAREN  shift, and go to state 40
 
-    stmts   go to state 84
-    stmt    go to state 18
-    assign  go to state 19
-    print   go to state 20
-    while   go to state 21
-    if      go to state 22
-    for     go to state 23
-    return  go to state 24
-    id      go to state 25
+    expr   go to state 86
+    id     go to state 42
+    const  go to state 43
 
 
 state 81
 
-   31 moreArgs: COMMA someArgs .
+   21 while: WHILE LPAREN expr RPAREN . DO stmts END
 
-    $default  reduce using rule 31 (moreArgs)
+    DO  shift, and go to state 87
 
 
 state 82
 
-   21 for: FOR LPAREN stmt SEMI expr SEMI . stmt RPAREN DO stmts END
+   22 if: IF LPAREN expr RPAREN . DO stmts END
+   23   | IF LPAREN expr RPAREN . DO stmts ELSE stmts END
 
-    ID      shift, and go to state 11
-    PRINT   shift, and go to state 12
-    RETURN  shift, and go to state 13
-    FOR     shift, and go to state 14
-    WHILE   shift, and go to state 15
-    IF      shift, and go to state 16
-
-    stmt    go to state 85
-    assign  go to state 19
-    print   go to state 20
-    while   go to state 21
-    if      go to state 22
-    for     go to state 23
-    return  go to state 24
-    id      go to state 25
+    DO  shift, and go to state 88
 
 
 state 83
 
-   18 while: WHILE LPAREN expr RPAREN DO stmts . END
+   34 moreArgs: COMMA . someArgs
 
-    END  shift, and go to state 86
+    ID      shift, and go to state 18
+    ICONST  shift, and go to state 37
+    BCONST  shift, and go to state 38
+    NOTOP   shift, and go to state 39
+    LPAREN  shift, and go to state 40
+
+    expr      go to state 77
+    someArgs  go to state 89
+    id        go to state 42
+    const     go to state 43
 
 
 state 84
 
-   19 if: IF LPAREN expr RPAREN DO stmts . END
-   20   | IF LPAREN expr RPAREN DO stmts . ELSE stmts END
+   33 someArgs: expr moreArgs .
 
-    END   shift, and go to state 87
-    ELSE  shift, and go to state 88
+    $default  reduce using rule 33 (someArgs)
 
 
 state 85
 
-   21 for: FOR LPAREN stmt SEMI expr SEMI stmt . RPAREN DO stmts END
+   27 expr: id LPAREN args RPAREN .
 
-    RPAREN  shift, and go to state 89
+    $default  reduce using rule 27 (expr)
 
 
 state 86
 
-   18 while: WHILE LPAREN expr RPAREN DO stmts END .
+   24 for: FOR LPAREN stmt SEMI expr . SEMI stmt RPAREN DO stmts END
+   25 expr: expr . binop expr
 
-    $default  reduce using rule 18 (while)
+    ADDOP   shift, and go to state 54
+    SUBOP   shift, and go to state 55
+    MULOP   shift, and go to state 56
+    DIVOP   shift, and go to state 57
+    SEMI    shift, and go to state 90
+    AND     shift, and go to state 58
+    OR      shift, and go to state 59
+    XOR     shift, and go to state 60
+    NOT_EQ  shift, and go to state 61
+    EQ      shift, and go to state 62
+    LT      shift, and go to state 63
+    GT      shift, and go to state 64
+    LEQ     shift, and go to state 65
+    GEQ     shift, and go to state 66
+
+    binop  go to state 67
 
 
 state 87
 
-   19 if: IF LPAREN expr RPAREN DO stmts END .
+   21 while: WHILE LPAREN expr RPAREN DO . stmts END
 
-    $default  reduce using rule 19 (if)
+    ID      shift, and go to state 18
+    PRINT   shift, and go to state 19
+    RETURN  shift, and go to state 20
+    FOR     shift, and go to state 21
+    WHILE   shift, and go to state 22
+    IF      shift, and go to state 23
+
+    stmts   go to state 91
+    stmt    go to state 25
+    assign  go to state 26
+    print   go to state 27
+    while   go to state 28
+    if      go to state 29
+    for     go to state 30
+    return  go to state 31
+    id      go to state 32
 
 
 state 88
 
-   20 if: IF LPAREN expr RPAREN DO stmts ELSE . stmts END
+   22 if: IF LPAREN expr RPAREN DO . stmts END
+   23   | IF LPAREN expr RPAREN DO . stmts ELSE stmts END
 
-    ID      shift, and go to state 11
-    PRINT   shift, and go to state 12
-    RETURN  shift, and go to state 13
-    FOR     shift, and go to state 14
-    WHILE   shift, and go to state 15
-    IF      shift, and go to state 16
+    ID      shift, and go to state 18
+    PRINT   shift, and go to state 19
+    RETURN  shift, and go to state 20
+    FOR     shift, and go to state 21
+    WHILE   shift, and go to state 22
+    IF      shift, and go to state 23
 
-    stmts   go to state 90
-    stmt    go to state 18
-    assign  go to state 19
-    print   go to state 20
-    while   go to state 21
-    if      go to state 22
-    for     go to state 23
-    return  go to state 24
-    id      go to state 25
+    stmts   go to state 92
+    stmt    go to state 25
+    assign  go to state 26
+    print   go to state 27
+    while   go to state 28
+    if      go to state 29
+    for     go to state 30
+    return  go to state 31
+    id      go to state 32
 
 
 state 89
 
-   21 for: FOR LPAREN stmt SEMI expr SEMI stmt RPAREN . DO stmts END
+   34 moreArgs: COMMA someArgs .
 
-    DO  shift, and go to state 91
+    $default  reduce using rule 34 (moreArgs)
 
 
 state 90
 
-   20 if: IF LPAREN expr RPAREN DO stmts ELSE stmts . END
+   24 for: FOR LPAREN stmt SEMI expr SEMI . stmt RPAREN DO stmts END
 
-    END  shift, and go to state 92
+    ID      shift, and go to state 18
+    PRINT   shift, and go to state 19
+    RETURN  shift, and go to state 20
+    FOR     shift, and go to state 21
+    WHILE   shift, and go to state 22
+    IF      shift, and go to state 23
+
+    stmt    go to state 93
+    assign  go to state 26
+    print   go to state 27
+    while   go to state 28
+    if      go to state 29
+    for     go to state 30
+    return  go to state 31
+    id      go to state 32
 
 
 state 91
 
-   21 for: FOR LPAREN stmt SEMI expr SEMI stmt RPAREN DO . stmts END
-
-    ID      shift, and go to state 11
-    PRINT   shift, and go to state 12
-    RETURN  shift, and go to state 13
-    FOR     shift, and go to state 14
-    WHILE   shift, and go to state 15
-    IF      shift, and go to state 16
-
-    stmts   go to state 93
-    stmt    go to state 18
-    assign  go to state 19
-    print   go to state 20
-    while   go to state 21
-    if      go to state 22
-    for     go to state 23
-    return  go to state 24
-    id      go to state 25
-
-
-state 92
-
-   20 if: IF LPAREN expr RPAREN DO stmts ELSE stmts END .
-
-    $default  reduce using rule 20 (if)
-
-
-state 93
-
-   21 for: FOR LPAREN stmt SEMI expr SEMI stmt RPAREN DO stmts . END
+   21 while: WHILE LPAREN expr RPAREN DO stmts . END
 
     END  shift, and go to state 94
 
 
+state 92
+
+   22 if: IF LPAREN expr RPAREN DO stmts . END
+   23   | IF LPAREN expr RPAREN DO stmts . ELSE stmts END
+
+    END   shift, and go to state 95
+    ELSE  shift, and go to state 96
+
+
+state 93
+
+   24 for: FOR LPAREN stmt SEMI expr SEMI stmt . RPAREN DO stmts END
+
+    RPAREN  shift, and go to state 97
+
+
 state 94
 
-   21 for: FOR LPAREN stmt SEMI expr SEMI stmt RPAREN DO stmts END .
+   21 while: WHILE LPAREN expr RPAREN DO stmts END .
 
-    $default  reduce using rule 21 (for)
+    $default  reduce using rule 21 (while)
+
+
+state 95
+
+   22 if: IF LPAREN expr RPAREN DO stmts END .
+
+    $default  reduce using rule 22 (if)
+
+
+state 96
+
+   23 if: IF LPAREN expr RPAREN DO stmts ELSE . stmts END
+
+    ID      shift, and go to state 18
+    PRINT   shift, and go to state 19
+    RETURN  shift, and go to state 20
+    FOR     shift, and go to state 21
+    WHILE   shift, and go to state 22
+    IF      shift, and go to state 23
+
+    stmts   go to state 98
+    stmt    go to state 25
+    assign  go to state 26
+    print   go to state 27
+    while   go to state 28
+    if      go to state 29
+    for     go to state 30
+    return  go to state 31
+    id      go to state 32
+
+
+state 97
+
+   24 for: FOR LPAREN stmt SEMI expr SEMI stmt RPAREN . DO stmts END
+
+    DO  shift, and go to state 99
+
+
+state 98
+
+   23 if: IF LPAREN expr RPAREN DO stmts ELSE stmts . END
+
+    END  shift, and go to state 100
+
+
+state 99
+
+   24 for: FOR LPAREN stmt SEMI expr SEMI stmt RPAREN DO . stmts END
+
+    ID      shift, and go to state 18
+    PRINT   shift, and go to state 19
+    RETURN  shift, and go to state 20
+    FOR     shift, and go to state 21
+    WHILE   shift, and go to state 22
+    IF      shift, and go to state 23
+
+    stmts   go to state 101
+    stmt    go to state 25
+    assign  go to state 26
+    print   go to state 27
+    while   go to state 28
+    if      go to state 29
+    for     go to state 30
+    return  go to state 31
+    id      go to state 32
+
+
+state 100
+
+   23 if: IF LPAREN expr RPAREN DO stmts ELSE stmts END .
+
+    $default  reduce using rule 23 (if)
+
+
+state 101
+
+   24 for: FOR LPAREN stmt SEMI expr SEMI stmt RPAREN DO stmts . END
+
+    END  shift, and go to state 102
+
+
+state 102
+
+   24 for: FOR LPAREN stmt SEMI expr SEMI stmt RPAREN DO stmts END .
+
+    $default  reduce using rule 24 (for)

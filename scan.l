@@ -24,19 +24,19 @@ ICONST  {digit}+
 
 %%
 "def"     { return FUNC_DECL; }
-"main"    { return MAIN; }
+"main"    { ret_print("found main"); return MAIN; }
 "return"  { return RETURN; }
 ","       { return COMMA; }
 "int"     { return INT; }
 "bool"    { return BOOL; }
-"print"   { ret_print("found print"); return PRINT; }
+"print"   { return PRINT; }
 "end"     { return END; }
 
-"for"     { ret_print("found for"); return FOR; }
-"while"   { ret_print("found while"); return WHILE;}
-"if"      { ret_print("found if");} return IF;
-"else"    { ret_print("found else"); return ELSE; }
-"do"      { ret_print("found do"); return DO; }
+"for"     { return FOR; }
+"while"   { return WHILE;}
+"if"      { return IF; }
+"else"    { return ELSE; }
+"do"      { return DO; }
 
 "("       { return LPAREN; }
 ")"       { return RPAREN; }

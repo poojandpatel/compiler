@@ -34,7 +34,13 @@
 
 %%
 
-program: main;
+program: functions main;
+
+functions: function functions
+         |
+         ;
+
+function: FUNC_DECL ID LPAREN RPAREN COLON END;
 
 main: FUNC_DECL MAIN vardecls stmts END;
 
@@ -94,8 +100,8 @@ return: RETURN expr;
 
 id: ID {printf("label found: %s\n", yylval.symboltab_item->st_name);};
 
-const: ICONST {printf("int found: %d\n", yylval.int_val);}
-     | BCONST {printf("bool found: %d\n", yylval.bool_val);}
+const: ICONST
+     | BCONST
      ;
 
 binop: ADDOP
@@ -120,8 +126,7 @@ void yyerror(){
 
 
 int main(int argc, char *argv[]){
-  init_hashtable();
-  //parsing
+  init_hashtable(); //symbol table
   int flag;
   yyin = fopen(argv[1], "r");
   flag = yyparse();

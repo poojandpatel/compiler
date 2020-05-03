@@ -798,7 +798,7 @@ YY_RULE_SETUP
 case 2:
 YY_RULE_SETUP
 #line 27 "scan.l"
-{ return MAIN; }
+{ ret_print("found main"); return MAIN; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
@@ -823,7 +823,7 @@ YY_RULE_SETUP
 case 7:
 YY_RULE_SETUP
 #line 32 "scan.l"
-{ ret_print("found print"); return PRINT; }
+{ return PRINT; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
@@ -833,27 +833,27 @@ YY_RULE_SETUP
 case 9:
 YY_RULE_SETUP
 #line 35 "scan.l"
-{ ret_print("found for"); return FOR; }
+{ return FOR; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 36 "scan.l"
-{ ret_print("found while"); return WHILE;}
+{ return WHILE;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 37 "scan.l"
-{ ret_print("found if");} return IF;
+{ return IF; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 38 "scan.l"
-{ ret_print("found else"); return ELSE; }
+{ return ELSE; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 39 "scan.l"
-{ ret_print("found do"); return DO; }
+{ return DO; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
