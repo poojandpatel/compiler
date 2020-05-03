@@ -28,19 +28,24 @@
 %token <other> LPAREN RPAREN ASSIGN SEMI COLON
 %token <other> FUNC_DECL END PRINT COMMA RETURN
 %token <other> FOR WHILE IF ELSE DO
-%token <other> AND OR XOR NOT_EQ EQ LT GT LEQ GEQ
+%token <other> AND OR XOR
+
+/* precedencies and associativities */
+%left LPAREN
+%right NOTOP
+%left MULOP DIVOP
+%left ADDOP SUBOP
+%left LT GT LEQ GEQ
+%left NOT_EQ EQ
+%left AND
+%left OR XOR
+%right ASSIGN
 
 %start program
 
 %%
 
-program: functions main;
-
-functions: function functions
-         |
-         ;
-
-function: FUNC_DECL ID LPAREN RPAREN COLON END;
+program: main;
 
 main: FUNC_DECL MAIN vardecls stmts END;
 

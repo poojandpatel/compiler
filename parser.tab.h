@@ -68,12 +68,12 @@
      AND = 284,
      OR = 285,
      XOR = 286,
-     NOT_EQ = 287,
-     EQ = 288,
-     LT = 289,
-     GT = 290,
-     LEQ = 291,
-     GEQ = 292
+     GEQ = 287,
+     LEQ = 288,
+     GT = 289,
+     LT = 290,
+     EQ = 291,
+     NOT_EQ = 292
    };
 #endif
 /* Tokens.  */
@@ -106,12 +106,12 @@
 #define AND 284
 #define OR 285
 #define XOR 286
-#define NOT_EQ 287
-#define EQ 288
-#define LT 289
-#define GT 290
-#define LEQ 291
-#define GEQ 292
+#define GEQ 287
+#define LEQ 288
+#define GT 289
+#define LT 290
+#define EQ 291
+#define NOT_EQ 292
 
 
 
