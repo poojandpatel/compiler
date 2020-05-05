@@ -113,12 +113,12 @@ DO (283) 18 19 20 21
 AND (284) 41
 OR (285) 42
 XOR (286) 43
-GEQ (287) 49
-LEQ (288) 48
-GT (289) 47
-LT (290) 46
-EQ (291) 45
-NOT_EQ (292) 44
+LT (287) 46
+GT (288) 47
+EQ (289) 45
+NOT_EQ (290) 44
+LEQ (291) 48
+GEQ (292) 49
 
 
 Nonterminals, with rules where they appear
@@ -474,12 +474,12 @@ state 33
     AND     shift, and go to state 50
     OR      shift, and go to state 51
     XOR     shift, and go to state 52
-    GEQ     shift, and go to state 53
-    LEQ     shift, and go to state 54
-    GT      shift, and go to state 55
-    LT      shift, and go to state 56
-    EQ      shift, and go to state 57
-    NOT_EQ  shift, and go to state 58
+    LT      shift, and go to state 53
+    GT      shift, and go to state 54
+    EQ      shift, and go to state 55
+    NOT_EQ  shift, and go to state 56
+    LEQ     shift, and go to state 57
+    GEQ     shift, and go to state 58
 
     $default  reduce using rule 33 (return)
 
@@ -628,12 +628,12 @@ state 44
     AND     shift, and go to state 50
     OR      shift, and go to state 51
     XOR     shift, and go to state 52
-    GEQ     shift, and go to state 53
-    LEQ     shift, and go to state 54
-    GT      shift, and go to state 55
-    LT      shift, and go to state 56
-    EQ      shift, and go to state 57
-    NOT_EQ  shift, and go to state 58
+    LT      shift, and go to state 53
+    GT      shift, and go to state 54
+    EQ      shift, and go to state 55
+    NOT_EQ  shift, and go to state 56
+    LEQ     shift, and go to state 57
+    GEQ     shift, and go to state 58
 
     $default  reduce using rule 23 (expr)
 
@@ -653,12 +653,12 @@ state 45
     AND     shift, and go to state 50
     OR      shift, and go to state 51
     XOR     shift, and go to state 52
-    GEQ     shift, and go to state 53
-    LEQ     shift, and go to state 54
-    GT      shift, and go to state 55
-    LT      shift, and go to state 56
-    EQ      shift, and go to state 57
-    NOT_EQ  shift, and go to state 58
+    LT      shift, and go to state 53
+    GT      shift, and go to state 54
+    EQ      shift, and go to state 55
+    NOT_EQ  shift, and go to state 56
+    LEQ     shift, and go to state 57
+    GEQ     shift, and go to state 58
 
     binop  go to state 59
 
@@ -714,44 +714,44 @@ state 52
 
 state 53
 
-   49 binop: GEQ .
+   46 binop: LT .
 
-    $default  reduce using rule 49 (binop)
+    $default  reduce using rule 46 (binop)
 
 
 state 54
-
-   48 binop: LEQ .
-
-    $default  reduce using rule 48 (binop)
-
-
-state 55
 
    47 binop: GT .
 
     $default  reduce using rule 47 (binop)
 
 
-state 56
-
-   46 binop: LT .
-
-    $default  reduce using rule 46 (binop)
-
-
-state 57
+state 55
 
    45 binop: EQ .
 
     $default  reduce using rule 45 (binop)
 
 
-state 58
+state 56
 
    44 binop: NOT_EQ .
 
     $default  reduce using rule 44 (binop)
+
+
+state 57
+
+   48 binop: LEQ .
+
+    $default  reduce using rule 48 (binop)
+
+
+state 58
+
+   49 binop: GEQ .
+
+    $default  reduce using rule 49 (binop)
 
 
 state 59
@@ -808,12 +808,12 @@ state 62
     AND     shift, and go to state 50
     OR      shift, and go to state 51
     XOR     shift, and go to state 52
-    GEQ     shift, and go to state 53
-    LEQ     shift, and go to state 54
-    GT      shift, and go to state 55
-    LT      shift, and go to state 56
-    EQ      shift, and go to state 57
-    NOT_EQ  shift, and go to state 58
+    LT      shift, and go to state 53
+    GT      shift, and go to state 54
+    EQ      shift, and go to state 55
+    NOT_EQ  shift, and go to state 56
+    LEQ     shift, and go to state 57
+    GEQ     shift, and go to state 58
 
     binop  go to state 59
 
@@ -832,12 +832,12 @@ state 63
     AND     shift, and go to state 50
     OR      shift, and go to state 51
     XOR     shift, and go to state 52
-    GEQ     shift, and go to state 53
-    LEQ     shift, and go to state 54
-    GT      shift, and go to state 55
-    LT      shift, and go to state 56
-    EQ      shift, and go to state 57
-    NOT_EQ  shift, and go to state 58
+    LT      shift, and go to state 53
+    GT      shift, and go to state 54
+    EQ      shift, and go to state 55
+    NOT_EQ  shift, and go to state 56
+    LEQ     shift, and go to state 57
+    GEQ     shift, and go to state 58
 
     binop  go to state 59
 
@@ -861,12 +861,12 @@ state 65
     AND     shift, and go to state 50
     OR      shift, and go to state 51
     XOR     shift, and go to state 52
-    GEQ     shift, and go to state 53
-    LEQ     shift, and go to state 54
-    GT      shift, and go to state 55
-    LT      shift, and go to state 56
-    EQ      shift, and go to state 57
-    NOT_EQ  shift, and go to state 58
+    LT      shift, and go to state 53
+    GT      shift, and go to state 54
+    EQ      shift, and go to state 55
+    NOT_EQ  shift, and go to state 56
+    LEQ     shift, and go to state 57
+    GEQ     shift, and go to state 58
 
     $default  reduce using rule 16 (assign)
 
@@ -899,12 +899,12 @@ state 68
     AND     shift, and go to state 50
     OR      shift, and go to state 51
     XOR     shift, and go to state 52
-    GEQ     shift, and go to state 53
-    LEQ     shift, and go to state 54
-    GT      shift, and go to state 55
-    LT      shift, and go to state 56
-    EQ      shift, and go to state 57
-    NOT_EQ  shift, and go to state 58
+    LT      shift, and go to state 53
+    GT      shift, and go to state 54
+    EQ      shift, and go to state 55
+    NOT_EQ  shift, and go to state 56
+    LEQ     shift, and go to state 57
+    GEQ     shift, and go to state 58
 
     ADDOP     [reduce using rule 22 (expr)]
     SUBOP     [reduce using rule 22 (expr)]
@@ -913,12 +913,12 @@ state 68
     AND       [reduce using rule 22 (expr)]
     OR        [reduce using rule 22 (expr)]
     XOR       [reduce using rule 22 (expr)]
-    GEQ       [reduce using rule 22 (expr)]
-    LEQ       [reduce using rule 22 (expr)]
-    GT        [reduce using rule 22 (expr)]
     LT        [reduce using rule 22 (expr)]
+    GT        [reduce using rule 22 (expr)]
     EQ        [reduce using rule 22 (expr)]
     NOT_EQ    [reduce using rule 22 (expr)]
+    LEQ       [reduce using rule 22 (expr)]
+    GEQ       [reduce using rule 22 (expr)]
     $default  reduce using rule 22 (expr)
 
     binop  go to state 59
@@ -937,12 +937,12 @@ state 69
     AND     shift, and go to state 50
     OR      shift, and go to state 51
     XOR     shift, and go to state 52
-    GEQ     shift, and go to state 53
-    LEQ     shift, and go to state 54
-    GT      shift, and go to state 55
-    LT      shift, and go to state 56
-    EQ      shift, and go to state 57
-    NOT_EQ  shift, and go to state 58
+    LT      shift, and go to state 53
+    GT      shift, and go to state 54
+    EQ      shift, and go to state 55
+    NOT_EQ  shift, and go to state 56
+    LEQ     shift, and go to state 57
+    GEQ     shift, and go to state 58
 
     $default  reduce using rule 32 (moreArgs)
 
@@ -1037,12 +1037,12 @@ state 78
     AND     shift, and go to state 50
     OR      shift, and go to state 51
     XOR     shift, and go to state 52
-    GEQ     shift, and go to state 53
-    LEQ     shift, and go to state 54
-    GT      shift, and go to state 55
-    LT      shift, and go to state 56
-    EQ      shift, and go to state 57
-    NOT_EQ  shift, and go to state 58
+    LT      shift, and go to state 53
+    GT      shift, and go to state 54
+    EQ      shift, and go to state 55
+    NOT_EQ  shift, and go to state 56
+    LEQ     shift, and go to state 57
+    GEQ     shift, and go to state 58
 
     binop  go to state 59
 

@@ -95,12 +95,12 @@
      AND = 284,
      OR = 285,
      XOR = 286,
-     GEQ = 287,
-     LEQ = 288,
-     GT = 289,
-     LT = 290,
-     EQ = 291,
-     NOT_EQ = 292
+     LT = 287,
+     GT = 288,
+     EQ = 289,
+     NOT_EQ = 290,
+     LEQ = 291,
+     GEQ = 292
    };
 #endif
 /* Tokens.  */
@@ -133,12 +133,12 @@
 #define AND 284
 #define OR 285
 #define XOR 286
-#define GEQ 287
-#define LEQ 288
-#define GT 289
-#define LT 290
-#define EQ 291
-#define NOT_EQ 292
+#define LT 287
+#define GT 288
+#define EQ 289
+#define NOT_EQ 290
+#define LEQ 291
+#define GEQ 292
 
 
 
@@ -148,6 +148,9 @@
 
   #include <stdio.h>
   #include "symtable.c"
+  #include "semantics.c"
+  #include "ast.h"
+  #include "ast.c"
   #include <stdlib.h>
   #include <string.h>
   #include <stdbool.h>
@@ -156,6 +159,10 @@
   extern int lineno;
   extern int yylex();
   void yyerror();
+
+  void add_vars(list_t* v);
+  list_t* var;
+  int size = 0;
 
 
 /* Enabling traces.  */
@@ -178,15 +185,17 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 15 "parser.y"
+#line 22 "parser.y"
 {
-  int int_val;
-  int bool_val;
+  Value val;
   list_t* symboltab_item;
+  AST_NODE* node;
+  int data_type;
+  int const_type;
   char other;
 }
 /* Line 193 of yacc.c.  */
-#line 190 "parser.tab.c"
+#line 199 "parser.tab.c"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -199,7 +208,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 203 "parser.tab.c"
+#line 212 "parser.tab.c"
 
 #ifdef short
 # undef short
@@ -497,19 +506,19 @@ static const yytype_int8 yyrhs[] =
       -1,    -1,    51,    54,    -1,    22,    53,    -1,    -1,    23,
       51,    -1,     3,    -1,     4,    -1,     5,    -1,    10,    -1,
       11,    -1,    12,    -1,    13,    -1,    29,    -1,    30,    -1,
-      31,    -1,    37,    -1,    36,    -1,    35,    -1,    34,    -1,
-      33,    -1,    32,    -1
+      31,    -1,    35,    -1,    34,    -1,    32,    -1,    33,    -1,
+      36,    -1,    37,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    48,    48,    50,    52,    53,    56,    58,    59,    62,
-      63,    66,    67,    68,    69,    70,    71,    74,    76,    78,
-      80,    81,    84,    86,    87,    88,    89,    90,    91,    94,
-      95,    98,   100,   101,   104,   106,   108,   109,   112,   113,
-     114,   115,   116,   117,   118,   119,   120,   121,   122,   123,
-     124
+       0,    62,    62,    64,    66,    67,    70,    81,    82,    85,
+      86,    89,    90,    91,    92,    93,    94,    97,   105,   107,
+     109,   110,   113,   115,   116,   117,   118,   119,   120,   123,
+     124,   127,   129,   130,   133,   135,   137,   138,   141,   142,
+     143,   144,   145,   146,   147,   148,   149,   150,   151,   152,
+     153
 };
 #endif
 
@@ -521,8 +530,8 @@ static const char *const yytname[] =
   "$end", "error", "$undefined", "ID", "ICONST", "BCONST", "INT", "BOOL",
   "MAIN", "NOTOP", "ADDOP", "SUBOP", "MULOP", "DIVOP", "LPAREN", "RPAREN",
   "ASSIGN", "SEMI", "COLON", "FUNC_DECL", "END", "PRINT", "COMMA",
-  "RETURN", "FOR", "WHILE", "IF", "ELSE", "DO", "AND", "OR", "XOR", "GEQ",
-  "LEQ", "GT", "LT", "EQ", "NOT_EQ", "$accept", "program", "main",
+  "RETURN", "FOR", "WHILE", "IF", "ELSE", "DO", "AND", "OR", "XOR", "LT",
+  "GT", "EQ", "NOT_EQ", "LEQ", "GEQ", "$accept", "program", "main",
   "vardecls", "vardecl", "type", "stmts", "stmt", "assign", "print",
   "while", "if", "for", "expr", "args", "someArgs", "moreArgs", "return",
   "id", "const", "binop", 0
@@ -573,7 +582,7 @@ static const yytype_uint8 yydefact[] =
       12,    13,    14,    15,    16,     0,     5,     6,     0,    36,
       37,     0,     0,    34,    26,    27,     0,     0,     0,     3,
       10,     0,     4,     0,    24,     0,    38,    39,    40,    41,
-      42,    43,    44,    50,    49,    48,    47,    46,    45,     0,
+      42,    43,    44,    47,    48,    46,    45,    49,    50,     0,
       30,     0,     0,     0,     9,    17,    18,    28,    23,    33,
        0,    29,     0,     0,     0,     0,    31,    25,     0,     0,
        0,    32,     0,     0,     0,     0,    19,    20,     0,     0,
@@ -1489,14 +1498,58 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 35:
-#line 106 "parser.y"
-    {printf("label found: %s\n", yylval.symboltab_item->st_name);;}
+        case 6:
+#line 70 "parser.y"
+    {
+  int i;
+  (yyval.node) = new_ast_decl((yyvsp[(1) - (2)].data_type), var);
+  size = 0;
+  AST_NODE_DECL *temp = (AST_NODE_DECL*) (yyval.node);
+  if(var->st_type == T_UNDEF)
+  {
+    set_type(var->st_name, var->data_type, T_UNDEF);
+  }
+;}
+    break;
+
+  case 7:
+#line 81 "parser.y"
+    {(yyval.data_type) = T_INT;;}
+    break;
+
+  case 8:
+#line 82 "parser.y"
+    {(yyval.data_type) = T_BOOL;;}
+    break;
+
+  case 17:
+#line 98 "parser.y"
+    {
+  AST_NODE_CONST *n = (AST_NODE_CONST* ) (yyval.symboltab_item);
+  (yyvsp[(1) - (3)].symboltab_item)->val = n->val;
+  (yyvsp[(1) - (3)].symboltab_item)->constType = n->constType;
+  (yyval.symboltab_item) = (yyvsp[(1) - (3)].symboltab_item);
+;}
+    break;
+
+  case 35:
+#line 135 "parser.y"
+    {(yyval.symboltab_item)=(yyvsp[(1) - (1)].symboltab_item);;}
+    break;
+
+  case 36:
+#line 137 "parser.y"
+    {(yyval.const_type) = new_cnst_decl(T_INT, (yyvsp[(1) - (1)].val));;}
+    break;
+
+  case 37:
+#line 138 "parser.y"
+    {(yyval.const_type) = new_cnst_decl(T_BOOL, (yyvsp[(1) - (1)].val));;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1500 "parser.tab.c"
+#line 1553 "parser.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1710,13 +1763,19 @@ yyreturn:
 }
 
 
-#line 126 "parser.y"
+#line 155 "parser.y"
 
 
 void yyerror(){
   fprintf(stderr, "syntax error\n");
 }
 
+void add_vars(list_t* v){
+  if(size == 0){
+    size++;
+    var = v;
+  }
+}
 
 int main(int argc, char *argv[]){
   init_hashtable(); //symbol table

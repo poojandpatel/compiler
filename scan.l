@@ -5,6 +5,8 @@
   #include <stdlib.h>
   #include <string.h>
   #include "symtable.h"
+  #include "semantics.h"
+  #include "ast.h"
   #include "parser.tab.h"
   int lineno = 1;
   extern FILE *yyin;
@@ -62,20 +64,20 @@ ICONST  {digit}+
 
 
 
-{ICONST}   { yylval.int_val = atoi(yytext); return ICONST; }
+{ICONST}   { yylval.val.int_val = atoi(yytext); return ICONST; }
 
 "true"    {
-            yylval.bool_val = 1;
+            yylval.val.bool_val = 1;
              return BCONST;
           }
 
 "false"    {
-            yylval.bool_val = 0;
+            yylval.val.bool_val = 0;
             return BCONST;
           }
 
 {ID}      {
-              insert(yytext, strlen(yytext), TYPE_UNDEF, lineno);
+              insert(yytext, strlen(yytext), UNDEF, lineno);
               yylval.symboltab_item = lookup(yytext);
               return ID;
           }

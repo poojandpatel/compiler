@@ -68,12 +68,12 @@
      AND = 284,
      OR = 285,
      XOR = 286,
-     GEQ = 287,
-     LEQ = 288,
-     GT = 289,
-     LT = 290,
-     EQ = 291,
-     NOT_EQ = 292
+     LT = 287,
+     GT = 288,
+     EQ = 289,
+     NOT_EQ = 290,
+     LEQ = 291,
+     GEQ = 292
    };
 #endif
 /* Tokens.  */
@@ -106,27 +106,29 @@
 #define AND 284
 #define OR 285
 #define XOR 286
-#define GEQ 287
-#define LEQ 288
-#define GT 289
-#define LT 290
-#define EQ 291
-#define NOT_EQ 292
+#define LT 287
+#define GT 288
+#define EQ 289
+#define NOT_EQ 290
+#define LEQ 291
+#define GEQ 292
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 15 "parser.y"
+#line 22 "parser.y"
 {
-  int int_val;
-  int bool_val;
+  Value val;
   list_t* symboltab_item;
+  AST_NODE* node;
+  int data_type;
+  int const_type;
   char other;
 }
 /* Line 1529 of yacc.c.  */
-#line 130 "parser.tab.h"
+#line 132 "parser.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

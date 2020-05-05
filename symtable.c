@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "symtable.h"
+#include "semantics.h"
 
-int cur_scope = 0;
+int curr_scope = 0; // 0 for main
+int isDeclared = 0; // 1 if new var is being declared, 0 if not
 
 void init_hashtable(){
   int i;
@@ -30,7 +32,7 @@ void insert(char *name, int len, int type, int lineno){
 		strncpy(l->st_name, name, len);
 		/* add to hashtable */
 		l->st_type = type;
-		l->scope = cur_scope;
+		l->scope = curr_scope;
 		l->lines = (RefList*) malloc(sizeof(RefList));
 		l->lines->lineno = lineno;
 		l->lines->next = NULL;
@@ -40,7 +42,7 @@ void insert(char *name, int len, int type, int lineno){
 	}
 	/* found in table, so just add line number */
 	else{
-		l->scope = cur_scope;
+		l->scope = curr_scope;
 		RefList *t = l->lines;
 		while (t->next != NULL) t = t->next;
 		/* add linenumber to reference list */
@@ -66,12 +68,29 @@ list_t *lookup_scope(char *name, int scope){ /* return symbol if found or NULL i
 }
 
 void hide_scope(){ /* hide the current scope */
-	if(cur_scope > 0) cur_scope--;
+	if(curr_scope > 0) curr_scope--;
 }
 
 void incr_scope(){ /* go to next scope */
-	cur_scope++;
+	curr_scope++;
 }
+
+/* set the type of the var */
+void set_type(char *name, int type, int inf_type) {
+  list_t *l = lookup(name);
+  l->st_type = type;
+  // if function; not in use yet
+  if(inf_type != T_UNDEF){l->st_type = inf_type;}
+}
+
+int get_type(char* name){
+  list_t   *l = lookup(name);
+  if(l->st_type == T_INT || l->st_type == T_BOOL)
+    return l->st_type;
+  else
+    return l->inf_type;
+}
+
 
 /* print to stdout by default */
 void symtab_dump(FILE * of){
@@ -85,12 +104,12 @@ void symtab_dump(FILE * of){
 		while (l != NULL){
 			RefList *t = l->lines;
 			fprintf(of,"%-12s ",l->st_name);
-			if (l->st_type == TYPE_INT) fprintf(of,"%-7s","int");
-			else if (l->st_type == TYPE_BOOL) fprintf(of,"%-7s","real");
-			else if (l->st_type == TYPE_FUNCTION){
+			if (l->st_type == T_INT) fprintf(of,"%-7s","int");
+			else if (l->st_type == T_BOOL) fprintf(of,"%-7s","bool");
+			else if (l->st_type == T_FUNCTION){
 				fprintf(of,"%-7s","function returns ");
-				if (l->inf_type == TYPE_INT) 		   fprintf(of,"%-7s","int");
-				else if (l->inf_type  == TYPE_BOOL)    fprintf(of,"%-7s","real");
+				if (l->inf_type == T_INT) 		   fprintf(of,"%-7s","int");
+				else if (l->inf_type  == T_BOOL)    fprintf(of,"%-7s","bool");
 				else fprintf(of,"%-7s","undef");
 			}
 			else fprintf(of,"%-7s","undef"); // if UNDEF or 0

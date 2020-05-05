@@ -1,6 +1,9 @@
 %{
   #include <stdio.h>
   #include "symtable.c"
+  #include "semantics.c"
+  #include "ast.h"
+  #include "ast.c"
   #include <stdlib.h>
   #include <string.h>
   #include <stdbool.h>
@@ -9,26 +12,32 @@
   extern int lineno;
   extern int yylex();
   void yyerror();
+
+  void add_vars(list_t* v);
+  list_t* var;
+  int size = 0;
 %}
 
 /* union */
 %union {
-  int int_val;
-  int bool_val;
+  Value val;
   list_t* symboltab_item;
+  AST_NODE* node;
+  int data_type;
+  int const_type;
   char other;
 }
 
 /* token definitions */
 %token <symboltab_item> ID
-%token <int_val> ICONST
-%token <bool_val> BCONST
+%token <val> ICONST
+%token <val> BCONST
 %token <other> INT BOOL MAIN
 %token <other> NOTOP ADDOP SUBOP MULOP DIVOP
 %token <other> LPAREN RPAREN ASSIGN SEMI COLON
 %token <other> FUNC_DECL END PRINT COMMA RETURN
 %token <other> FOR WHILE IF ELSE DO
-%token <other> AND OR XOR
+%token <other> AND OR XOR LT GT EQ NOT_EQ LEQ GEQ
 
 /* precedencies and associativities */
 %left LPAREN
@@ -40,6 +49,11 @@
 %left AND
 %left OR XOR
 %right ASSIGN
+
+%type <node> vardecls vardecl
+%type <data_type> type
+%type <symboltab_item> id assign
+%type <const_type> const
 
 %start program
 
@@ -53,10 +67,19 @@ vardecls: vardecl SEMI vardecls
         | /* nothing */
         ;
 
-vardecl: type id ;
+vardecl: type id {
+  int i;
+  $$ = new_ast_decl($1, var);
+  size = 0;
+  AST_NODE_DECL *temp = (AST_NODE_DECL*) $$;
+  if(var->st_type == T_UNDEF)
+  {
+    set_type(var->st_name, var->data_type, T_UNDEF);
+  }
+};
 
-type: INT
-    | BOOL
+type: INT   {$$ = T_INT;}
+    | BOOL  {$$ = T_BOOL;}
     ;
 
 stmts: stmt SEMI stmts
@@ -71,7 +94,13 @@ stmt: assign
     | return
     ;
 
-assign: id ASSIGN expr ;
+assign: id ASSIGN expr
+{
+  AST_NODE_CONST *n = (AST_NODE_CONST* ) $$;
+  $1->val = n->val;
+  $1->constType = n->constType;
+  $$ = $1;
+};
 
 print: PRINT LPAREN id RPAREN ;
 
@@ -103,10 +132,10 @@ moreArgs: COMMA someArgs
 
 return: RETURN expr;
 
-id: ID {printf("label found: %s\n", yylval.symboltab_item->st_name);};
+id: ID {$$=$1;};
 
-const: ICONST
-     | BCONST
+const: ICONST {$$ = new_cnst_decl(T_INT, $1);}
+     | BCONST {$$ = new_cnst_decl(T_BOOL, $1);}
      ;
 
 binop: ADDOP
@@ -129,6 +158,12 @@ void yyerror(){
   fprintf(stderr, "syntax error\n");
 }
 
+void add_vars(list_t* v){
+  if(size == 0){
+    size++;
+    var = v;
+  }
+}
 
 int main(int argc, char *argv[]){
   init_hashtable(); //symbol table

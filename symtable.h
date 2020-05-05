@@ -5,23 +5,17 @@
 /* max_size of token identifiers. we will use 31 as thats what C uses */
 #define MAX_TOKEN_LEN 31
 
-/* token types */
-#define TYPE_UNDEF 0
-#define TYPE_INT 1
-#define TYPE_BOOL 2
-#define TYPE_FUNCTION 3
-
 /* this is for functions and thier parameters*/
 
-#define BY_VALUE 1
-#define BY_REFER_2
+typedef union Value {
+  int int_val;
+  int bool_val;
+} Value;
 
 typedef struct Param {
   int type;
   char name[MAX_TOKEN_LEN];
-  int int_val; // param could be an int
-  bool bool_val; // param could be a bool
-  int passing; // pass by value or reference
+  Value val;
 }Param;
 
 /* we will use a linkedlist of references for each variable */
@@ -33,17 +27,16 @@ typedef struct RefList {
 }RefList;
 
 typedef struct list_t {
-  char st_name[MAX_TOKEN_LEN];
-  int st_size;
-  int scope;
-  RefList *lines;
-  int st_ival;
-  bool st_bval;
+  char st_name[MAX_TOKEN_LEN]; // name
+  int st_size; //size
+  int scope; // is it main or function var
+  RefList *lines; //lines where the variable shows up
+  Value val;
   int st_type;
   int inf_type;
   // function parameter
-  Param *params;
-  int num_params;
+  Param *params; // not using yet
+  int num_params; // not using yet
   struct list_t* next;
 }list_t;
 
@@ -57,3 +50,6 @@ list_t *lookup(char *name);
 list_t *lookup_scope(char *name, int scope);
 void hide_scope();
 void dump(FILE* of);
+
+void set_type(char *name, int type, int inf_type);
+int get_type(char* name);
